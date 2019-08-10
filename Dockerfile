@@ -22,6 +22,6 @@ WORKDIR /tmp/unique_for_apex/apex
 RUN pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
 WORKDIR /workspace
 
-EXPOSE 22
+EXPOSE 22 6006
 CMD ["/usr/sbin/sshd", "-D"]
 
