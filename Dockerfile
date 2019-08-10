@@ -5,6 +5,11 @@ RUN mkdir /var/run/sshd
 RUN echo "dockerdev\ndockerdev" | passwd root
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
+RUN mkdir /root/.ssh
+ADD ./id_ed25519.pub /root/.ssh
+RUN echo "`cat ~/.ssh/id_ed25519.pub`" >> /root/.ssh/authorized_keys
+RUN chmod 755 /root/.ssh && chmod 644 /root/.ssh/authorized_keys
+
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
