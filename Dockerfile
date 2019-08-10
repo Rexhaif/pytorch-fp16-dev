@@ -2,7 +2,7 @@ FROM nvcr.io/nvidia/pytorch:19.07-py3
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
-RUN echo "dockerdev\ndockerdev" | passwd root
+RUN echo "root:dockerpass" | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 RUN mkdir /root/.ssh
